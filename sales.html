@@ -3,12 +3,31 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="stylesheet.css"> </link>
   </head>
   <body>
+    <form id="newlocationform">
+      <fieldset>
+        <legend>Create New Location</legend>
 
-    <p></p>
+        <label for="Location">Location</label>
+        <input name="Location" type="text"/>
 
-  <table id='shops'> </table>
-  <script src="app.js"> </script>
+        <label for="MinCus">Minimum Customers Per Hour</label>
+        <input name="MinCus" type="text"/>
+
+        <label for="MaxCus">Maximum Customers Per Hour</label>
+        <input name="MaxCus" type="text"/>
+
+        <label for="AvgCookie">Average Cookies Per Hour</label>
+        <input name="AvgCookie" type="text"/>
+
+        <button type="submit">Submit New Location Data!</button>
+      </fieldset>
+    </form>
+
+    <table id='shops'> </table>
+
+    <script src="app.js"> </script>
   </body>
 </html>
