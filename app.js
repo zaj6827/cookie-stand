@@ -22,7 +22,6 @@ function Store(location, minCustomers, maxCustomers, avgCookies) {
   this.dailySales = 0;
   this.cookiesPerHour();
   salmonStores.push(this);
-  this.render();
 }
 
 Store.prototype.customersPerHour = function () {
@@ -77,21 +76,52 @@ function makeHeaders () {
   trEl.appendChild(thEl);
 };
 
-function handleUserSubmission(event) {
-  event.preventDefault();
-  var locationRemark = event.target.Location.value
-  var minCusRemark = parseInt(event.target.MinCus.value);
-  var maxCusRemark = parseInt(event.target.MaxCus.value);
-  var avgCkyRemark = event.target.AvgCookie.value
-  new Store(locationRemark,minCusRemark,maxCusRemark,avgCkyRemark);
-  salmonStores.push();
+function makeFooter () {
+  var allTotal = 0;
+  var hourlyTotal = 0;
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
+  thEl.textContent = 'Totals Each Hour';
+  trEl.appendChild(thEl);
+  shopTable.appendChild(trEl)
+  for (var i = 0; i < openHours.length; i++) {
+    hourlyTotal = 0;
+    for (var j = 0; j < salmonStores.length; j++) {
+      hourlyTotal += salmonStores[j].cookiesEachHour[i];
+      allTotal += salmonStores[j].cookiesEachHour[i];
+  }
+  var thEl = document.createElement('th');
+  thEl.textContent = hourlyTotal;
+  trEl.appendChild(thEl);
+}
+  var thEl = document.createElement('th')
+  thEl.textContent = allTotal;
+  trEl.appendChild(thEl)
+  shopTable.appendChild(trEl);
+};
+
+function renderTable () {
+  makeHeaders();
+  for (var i = 0; i < salmonStores.length; i++) {
+    salmonStores[i].render();
+  }
+  makeFooter();
 }
 
-makeHeaders();
+function handleUserSubmission(event) {
+  event.preventDefault();
+  var locationRemark = event.target.Location.value;
+  var minCusRemark = parseInt(event.target.MinCus.value);
+  var maxCusRemark = parseInt(event.target.MaxCus.value);
+  var avgCkyRemark = parseFloat(event.target.AvgCookie.value);
+  var formStore = new Store(locationRemark, minCusRemark, maxCusRemark, avgCkyRemark);
+  shopTable.innerHTML='';
+  renderTable();
+}
 new Store('Pike Place', 23, 65, 6.3);
 new Store('Seattle Airport', 3, 24, 1.2);
 new Store('Seattle Center', 11, 38, 1.2);
 new Store('Capitol Hill', 20, 38, 2.3);
 new Store('Alki', 2, 16, 4.6);
-
+renderTable();
 formBody.addEventListener('submit', handleUserSubmission);
