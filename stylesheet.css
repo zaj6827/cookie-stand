@@ -6,15 +6,15 @@
   background-color: red;
 }
 table {
-  width: 1000px
+  width: 1000px;
 }
 td {
-  border: solid 2px violet;
+  border: solid 2px #4039ff;
   border-spacing: 5px 10px;
-  background-color: grey;
+  background-color: #a339ff;
 }
 th {
-  border: solid 2px green;
+  border: solid 2px black;
   border-spacing: 5px 10px;
-  background-color: orange;
+  background-color: #39efff;
 }
